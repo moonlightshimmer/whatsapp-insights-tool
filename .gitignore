@@ -1,0 +1,25 @@
+# Python and Streamlit .gitignore template
+
+# Ignore virtual environments
+venv/
+.env
+
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Jupyter / VS Code / OS files
+*.ipynb_checkpoints
+.vscode/
+.DS_Store
+
+# Logs / Datasets / Large files
+*.log
+*.csv
+*.pkl
+
+# Git LFS or build files
+*.h5
+*.tar
+*.zip
