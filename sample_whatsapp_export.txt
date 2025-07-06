@@ -1,0 +1,40 @@
+[27/06/24, 10:30:15] John Doe: Hi, I'd like to place an order
+[27/06/24, 10:31:20] You: Sure! What would you like?
+[27/06/24, 10:32:45] John Doe: Order: 2 Biryani, 1 Naan | Name: John Doe | Date: 2024-06-27
+[27/06/24, 10:33:10] You: Perfect! Your order is confirmed
+[27/06/24, 10:35:22] Alice Smith: Hello! Can I order some food?
+[27/06/24, 10:36:15] You: Of course! What would you like?
+[27/06/24, 10:37:30] Alice Smith: Order: 1 Curry, 2 Rice, 1 Salad | Name: Alice Smith | Date: 2024-06-27
+[27/06/24, 10:38:45] You: Great! Order received
+[28/06/24, 09:15:30] Bob Johnson: Hi there
+[28/06/24, 09:16:20] You: Hello! How can I help?
+[28/06/24, 09:17:45] Bob Johnson: Order: 3 Biryani, 2 Naan | Name: Bob Johnson | Date: 2024-06-28
+[28/06/24, 09:18:10] You: Excellent! Order confirmed
+[01/07/24, 14:20:15] John Doe: Hi again! I'd like to order more
+[01/07/24, 14:21:30] You: Welcome back! What would you like?
+[01/07/24, 14:22:45] John Doe: Order: 1 Curry, 1 Rice | Name: John Doe | Date: 2024-07-01
+[01/07/24, 14:23:20] You: Perfect! Order received
+[15/07/24, 11:45:30] Alice Smith: Hello! Time for another order
+[15/07/24, 11:46:15] You: Great to hear from you again!
+[15/07/24, 11:47:20] Alice Smith: Order: 2 Biryani, 1 Naan, 1 Salad | Name: Alice Smith | Date: 2024-07-15
+[15/07/24, 11:48:10] You: Wonderful! Order confirmed
+[16/07/24, 16:30:45] Carol Wilson: Hi! First time ordering
+[16/07/24, 16:31:20] You: Welcome! What would you like to try?
+[16/07/24, 16:32:15] Carol Wilson: Order: 1 Curry, 2 Rice | Name: Carol Wilson | Date: 2024-07-16
+[16/07/24, 16:33:00] You: Excellent choice! Order received
+[17/07/24, 12:15:30] David Brown: Hello! I'd like to order
+[17/07/24, 12:16:45] You: Sure! What can I get you?
+[17/07/24, 12:17:20] David Brown: Order: 2 Biryani, 1 Naan | Name: David Brown | Date: 2024-07-17
+[17/07/24, 12:18:10] You: Perfect! Order confirmed
+[18/07/24, 18:45:20] John Doe: Hi! Another order please
+[18/07/24, 18:46:30] You: Welcome back! What would you like?
+[18/07/24, 18:47:15] John Doe: Order: 1 Curry, 1 Rice, 1 Salad | Name: John Doe | Date: 2024-07-18
+[18/07/24, 18:48:00] You: Great! Order received
+[19/07/24, 13:20:45] Alice Smith: Hello! Order time again
+[19/07/24, 13:21:30] You: Always great to hear from you!
+[19/07/24, 13:22:15] Alice Smith: Order: 3 Biryani, 2 Naan | Name: Alice Smith | Date: 2024-07-19
+[19/07/24, 13:23:00] You: Excellent! Order confirmed
+[20/07/24, 17:30:20] Bob Johnson: Hi! I'd like to order again
+[20/07/24, 17:31:10] You: Welcome back! What would you like?
+[20/07/24, 17:32:45] Bob Johnson: Order: 1 Curry, 2 Rice | Name: Bob Johnson | Date: 2024-07-20
+[20/07/24, 17:33:30] You: Perfect! Order received 
