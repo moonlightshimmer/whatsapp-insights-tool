@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 import re
 from datetime import datetime, timedelta
-from whatsapp_integration import integrate_whatsapp_export, show_whatsapp_export_instructions
-from visualizations import create_visualizations
+from whatsapp_integration.core import integrate_whatsapp_export, show_whatsapp_export_instructions
+from visualizations.core import create_visualizations   
 
 WHATSAPP_INTEGRATION_AVAILABLE = True
 VISUALIZATIONS_AVAILABLE = True
