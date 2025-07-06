@@ -2,8 +2,31 @@ import streamlit as st
 import pandas as pd
 import re
 from datetime import datetime, timedelta
-from whatsapp_integration import integrate_whatsapp_export, show_whatsapp_export_instructions
-from visualizations import create_visualizations
+
+# Import with error handling for Streamlit Cloud deployment
+try:
+    from whatsapp_integration import integrate_whatsapp_export, show_whatsapp_export_instructions
+    WHATSAPP_INTEGRATION_AVAILABLE = True
+except ImportError as e:
+    # Try alternative import paths
+    try:
+        from whatsapp_integration.core import integrate_whatsapp_export, show_whatsapp_export_instructions
+        WHATSAPP_INTEGRATION_AVAILABLE = True
+    except ImportError:
+        st.warning(f"⚠️ WhatsApp integration module not available: {e}")
+        WHATSAPP_INTEGRATION_AVAILABLE = False
+
+try:
+    from visualizations import create_visualizations
+    VISUALIZATIONS_AVAILABLE = True
+except ImportError as e:
+    # Try alternative import paths
+    try:
+        from visualizations.core import create_visualizations
+        VISUALIZATIONS_AVAILABLE = True
+    except ImportError:
+        st.warning(f"⚠️ Visualizations module not available: {e}")
+        VISUALIZATIONS_AVAILABLE = False
 
 def parse_whatsapp_messages(messages):
     order_data = []
@@ -65,11 +88,21 @@ def generate_insights(order_df):
 
 st.title("Tiffin Service Insights Dashboard")
 
-# Show WhatsApp export instructions
-show_whatsapp_export_instructions()
-
-# WhatsApp Integration
-whatsapp_df = integrate_whatsapp_export()
+# WhatsApp Integration (with fallback)
+if WHATSAPP_INTEGRATION_AVAILABLE:
+    # Show WhatsApp export instructions
+    show_whatsapp_export_instructions()
+    
+    # WhatsApp Integration
+    whatsapp_df = integrate_whatsapp_export()
+else:
+    # Fallback to original method
+    st.subheader("📱 WhatsApp Order Messages")
+    whatsapp_input = st.text_area("Paste WhatsApp Order Messages (one per line)")
+    whatsapp_df = None
+    if whatsapp_input:
+        whatsapp_lines = whatsapp_input.strip().split('\n')
+        whatsapp_df = parse_whatsapp_messages(whatsapp_lines)
 
 uploaded_zelle = st.file_uploader("Upload Zelle Transactions CSV", type="csv")
 
@@ -82,7 +115,10 @@ if uploaded_zelle and whatsapp_df is not None:
     insights = generate_insights(whatsapp_df)
 
     # Create visualizations
-    create_visualizations(whatsapp_df, zelle_df, insights)
+    if VISUALIZATIONS_AVAILABLE:
+        create_visualizations(whatsapp_df, zelle_df, insights)
+    else:
+        st.warning("⚠️ Visualizations are not available in this environment")
     
     # Text insights
     st.subheader("📋 Detailed Insights")
