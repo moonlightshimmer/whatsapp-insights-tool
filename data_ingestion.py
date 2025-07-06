@@ -2,31 +2,11 @@ import streamlit as st
 import pandas as pd
 import re
 from datetime import datetime, timedelta
+from whatsapp_integration import integrate_whatsapp_export, show_whatsapp_export_instructions
+from visualizations import create_visualizations
 
-# Import with error handling for Streamlit Cloud deployment
-try:
-    from whatsapp_integration import integrate_whatsapp_export, show_whatsapp_export_instructions
-    WHATSAPP_INTEGRATION_AVAILABLE = True
-except ImportError as e:
-    # Try alternative import paths
-    try:
-        from whatsapp_integration.core import integrate_whatsapp_export, show_whatsapp_export_instructions
-        WHATSAPP_INTEGRATION_AVAILABLE = True
-    except ImportError:
-        st.warning(f"⚠️ WhatsApp integration module not available: {e}")
-        WHATSAPP_INTEGRATION_AVAILABLE = False
-
-try:
-    from visualizations import create_visualizations
-    VISUALIZATIONS_AVAILABLE = True
-except ImportError as e:
-    # Try alternative import paths
-    try:
-        from visualizations.core import create_visualizations
-        VISUALIZATIONS_AVAILABLE = True
-    except ImportError:
-        st.warning(f"⚠️ Visualizations module not available: {e}")
-        VISUALIZATIONS_AVAILABLE = False
+WHATSAPP_INTEGRATION_AVAILABLE = True
+VISUALIZATIONS_AVAILABLE = True
 
 def parse_whatsapp_messages(messages):
     order_data = []
