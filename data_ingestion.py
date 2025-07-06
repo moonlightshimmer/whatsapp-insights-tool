@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import re
 from datetime import datetime, timedelta
+from whatsapp_integration import integrate_whatsapp_export, show_whatsapp_export_instructions
+from visualizations import create_visualizations
 
 def parse_whatsapp_messages(messages):
     order_data = []
@@ -63,12 +65,15 @@ def generate_insights(order_df):
 
 st.title("Tiffin Service Insights Dashboard")
 
-uploaded_zelle = st.file_uploader("Upload Zelle Transactions CSV", type="csv")
-whatsapp_input = st.text_area("Paste WhatsApp Order Messages (one per line)")
+# Show WhatsApp export instructions
+show_whatsapp_export_instructions()
 
-if uploaded_zelle and whatsapp_input:
-    whatsapp_lines = whatsapp_input.strip().split('\n')
-    whatsapp_df = parse_whatsapp_messages(whatsapp_lines)
+# WhatsApp Integration
+whatsapp_df = integrate_whatsapp_export()
+
+uploaded_zelle = st.file_uploader("Upload Zelle Transactions CSV", type="csv")
+
+if uploaded_zelle and whatsapp_df is not None:
     zelle_df = read_zelle_csv(uploaded_zelle)
 
     st.subheader("Parsed Orders")
@@ -76,12 +81,38 @@ if uploaded_zelle and whatsapp_input:
 
     insights = generate_insights(whatsapp_df)
 
-    st.subheader("Insights")
-    st.write("Increasing Items:", insights['increasing_items'])
-    st.write("Top Items:", insights['top_items'])
-    st.write("Low Stock:", insights['low_stock'])
-    st.write("Retained Customers:", insights['retained_customers'])
-    st.write("Churned Customers:", insights['churned_customers'])
-    st.write("Reordered Items:", insights['reordered_items'])
+    # Create visualizations
+    create_visualizations(whatsapp_df, zelle_df, insights)
+    
+    # Text insights
+    st.subheader("📋 Detailed Insights")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.write("**📈 Increasing Items:**")
+        for item, trend in insights['increasing_items']:
+            st.write(f"- {item}: {trend}")
+        
+        st.write("**🏆 Top Items:**")
+        for item, qty in insights['top_items'].items():
+            st.write(f"- {item}: {qty} units")
+        
+        st.write("**⚠️ Low Stock Items:**")
+        for item, qty in insights['low_stock'].items():
+            st.write(f"- {item}: {qty} units remaining")
+    
+    with col2:
+        st.write("**👥 Retained Customers:**")
+        for customer in insights['retained_customers']:
+            st.write(f"- {customer}")
+        
+        st.write("**❌ Churned Customers:**")
+        for customer, churn_type in insights['churned_customers'].items():
+            st.write(f"- {customer} ({churn_type})")
+        
+        st.write("**🔄 Reordered Items:**")
+        for record in insights['reordered_items']:
+            st.write(f"- {record['customer']}: {record['item']} ({record['order_count']} times)")
 else:
     st.info("Please upload both WhatsApp order messages and Zelle transaction file to see insights.")
