@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import re
-from datetime import datetime, timedelta
+from datetime import datetime
 from whatsapp_integration.core import integrate_whatsapp_export, show_whatsapp_export_instructions
 from visualizations.core import create_visualizations   
 
@@ -71,7 +71,22 @@ st.title("Tiffin Service Insights Dashboard")
 # WhatsApp Integration (with fallback)
 if WHATSAPP_INTEGRATION_AVAILABLE:
     # Show WhatsApp export instructions
-    show_whatsapp_export_instructions()
+    #show_whatsapp_export_instructions()
+    with st.expander("📋 How to Export WhatsApp Chat"):
+        st.write("""
+        **To export your WhatsApp chat:**
+        
+        1. **Open WhatsApp** on your phone
+        2. **Go to the chat** you want to export
+        3. **Tap the three dots** (menu) in the top right
+        4. **Select 'More'** → **'Export chat'**
+        5. **Choose 'Without Media'** (faster, smaller file)
+        6. **Share the file** to your computer (email, cloud storage, etc.)
+        7. **Upload the .txt file** in the app above
+        
+        **Note:** The chat export will include all messages. The app will automatically 
+        extract only the order messages that match the expected format.
+        """) 
     
     # WhatsApp Integration
     whatsapp_df = integrate_whatsapp_export()
