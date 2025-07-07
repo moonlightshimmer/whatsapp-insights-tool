@@ -1,4 +1,4 @@
-# WhatsApp Insights Tool
+# Tiffin Service Insights Tool
 
 A Streamlit web application that analyzes WhatsApp order messages and Zelle payment transactions to generate business insights for small businesses, particularly food services like tiffin businesses. Currently deployed on streamlit community cloud as Tiffin Service Insights Dashboard
 
